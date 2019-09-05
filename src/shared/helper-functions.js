@@ -24,7 +24,7 @@ export const checkFriendValues = (friend, value) => {
 };
 
 export const getFavQueryParam = route =>
-  route && route.query && `${route.query.favorites}` === "true";
+  route && route.query && `${route.query.favorite}` === "true";
 
 export const handleFriend = (friendData, originalFriend) => {
   let verb = "post";

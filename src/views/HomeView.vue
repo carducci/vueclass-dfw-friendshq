@@ -2,7 +2,6 @@
     <v-layout row wrap>
 
 
-
         <v-flex md3 sm12 v-for="card in cards">
             <router-link v-bind:to="card.route">
                 <v-card>
@@ -18,26 +17,39 @@
 </template>
 
 <script>
+  import axios from "axios";
+    //let friends = [];
   export default {
     name: "HomeView",
 
     data: () => ({
+      friends: [],
       cards: [
         {
           icon: "contacts",
           title: "Friends",
-          number: 100,
+          number: 0,
           route: "/friends"
         },
         {
           icon: "favorite",
           title: "Favorites",
-          number: 1,
+          number: 0,
           route: "/friends?favorite=true"
         }
-        ]
+      ]
 
-    })
+    }),
+    mounted() {
+      axios.get("http://localhost:3000/friends")
+        .then(response => {
+          this.friends = response.data;
+          let friendCount = this.friends.length;
+          let favoriteCount = this.friends.filter((friend) => friend.fav).length;
+          this.cards[0].number = friendCount;
+          this.cards[1].number = favoriteCount;
+        });
+    }
 
 
   };
