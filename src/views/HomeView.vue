@@ -4,7 +4,7 @@
 
 
         <v-flex md3 sm12 v-for="card in cards">
-            <router-link to="/friends">
+            <router-link v-bind:to="card.route">
                 <v-card>
                     <v-icon color="red" size="50px">{{card.icon}}</v-icon>
                     <v-card-title>{{card.title}}</v-card-title>
@@ -26,12 +26,14 @@
         {
           icon: "contacts",
           title: "Friends",
-          number: 100
+          number: 100,
+          route: "/friends"
         },
         {
           icon: "favorite",
           title: "Favorites",
-          number: 1
+          number: 1,
+          route: "/friends?favorite=true"
         }
         ]
 
