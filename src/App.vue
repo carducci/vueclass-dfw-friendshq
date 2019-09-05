@@ -34,7 +34,7 @@
 
     <v-content>
       <v-container grid-list-xl fluid>
-        <h1>Hello World!</h1>
+        <router-view></router-view>
       </v-container>
     </v-content>
 
