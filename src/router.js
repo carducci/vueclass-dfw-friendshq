@@ -1,12 +1,14 @@
 import Vue from "vue";
 import Router from "vue-router";
 import HomeView from "@/views/HomeView";
+import FriendsListView from "@/views/FriendsListView";
 
 Vue.use(Router);
 
 export default new Router({
   base: process.env.BASE_URL,
-  routes: [{
+  routes: [
+    {
     path: "/home",
     name: "home",
     alias: "/",
@@ -14,7 +16,18 @@ export default new Router({
       title: "Home"
     },
     component: HomeView
-  }, {
+  },
+    {
+      path: "/friends",
+      name: "friends",
+
+      meta: {
+        title: "Friends"
+      },
+      component: FriendsListView
+    },
+
+    {
     path: "*",
     redirect: "/home"
   }
