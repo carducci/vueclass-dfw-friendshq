@@ -1,6 +1,7 @@
 <template>
     <div id="FriendsListView">
         Friends List
+        <v-switch color="success" v-model="favoritesOnly"></v-switch>
         <ul>
             <li v-for="friend in computedFriendList" v-bind:key="friend.id">
                 <!-- Show all friends if favoritesOnly is false
@@ -9,6 +10,8 @@
                 {{friend.firstName}}
             </li>
         </ul>
+        <router-link to="/addfriend">Add Friend</router-link>
+
     </div>
 </template>
 

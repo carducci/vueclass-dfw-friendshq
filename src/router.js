@@ -26,6 +26,16 @@ export default new Router({
       },
       component: FriendsListView
     },
+    {
+      path: "/addfriend",
+      name: "addfriend",
+
+      meta: {
+        title: "Add Friend"
+      },
+      component: () => import("@/views/FriendDetailView")
+
+    },
 
     {
     path: "*",
