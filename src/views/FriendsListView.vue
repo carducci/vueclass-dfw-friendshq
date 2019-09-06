@@ -25,27 +25,29 @@
     data: function() {
 
       return {
-        friends: [],
         favoritesOnly: false
       };
     },
     computed: {
+      // friends() {
+      //   return this.$store.state.friends;
+      // },
       computedFriendList: function() {
         // If favoritesOnly is false, return the whole list
         if (!this.favoritesOnly) {
-          return this.friends;
+          return this.$store.state.friends;
         } else {
-          return this.friends.filter((friend) => friend.fav);
+          return this.$store.state.friends.filter((friend) => friend.fav);
         }
         // If favoritesOnly is true, only return favorites
 
       }
     },
     mounted() {
-      axios.get("http://localhost:3000/friends")
-        .then(response => {
-          this.friends = response.data;
-        });
+      // axios.get("http://localhost:3000/friends")
+      //   .then(response => {
+      //     this.friends = response.data;
+      //   });
 
 
       this.favoritesOnly = getFavQueryParam(this.$route);
