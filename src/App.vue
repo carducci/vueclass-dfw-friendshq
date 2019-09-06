@@ -51,6 +51,9 @@ export default {
   data: () => ({
     primaryDrawerState: true,
     navItems: []
-  })
+  }),
+  created(){
+    this.$store.dispatch('loadData');
+  }
 };
 </script>

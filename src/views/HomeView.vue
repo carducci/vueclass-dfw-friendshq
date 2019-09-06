@@ -48,13 +48,7 @@
 
     }),
     methods: {
-      getFriendCount: function (isFave) {
-        if(isFave){
-          return this.favoriteCount();
-        } else {
-          return this.friendCount();
-        }
-      }
+
     },
     computed: {
       friends: function() {
