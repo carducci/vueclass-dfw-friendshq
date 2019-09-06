@@ -2,13 +2,20 @@
     <v-layout row wrap>
 
 
-        <v-flex md3 sm12 v-for="card in cards">
-            <router-link v-bind:to="card.route">
-                <v-card>
-                    <v-icon color="red" size="50px">{{card.icon}}</v-icon>
-                    <v-card-title>{{card.title}}</v-card-title>
-                    <v-card-text>{{card.number}}</v-card-text>
-                </v-card>
+        <v-flex md3 sm12>
+            <router-link v-bind:to="cards[0].route">
+                <HomeCard :card="cards[0]">
+                    <!--Put the numberCount here-->
+                    {{friendCount}}
+                </HomeCard>
+            </router-link>
+        </v-flex>
+        <v-flex md3 sm12>
+            <router-link v-bind:to="cards[1].route">
+                <HomeCard :card="cards[1]">
+                    <!--Put the numberCount here-->
+                    {{favoriteCount}}
+                </HomeCard>
             </router-link>
         </v-flex>
 
@@ -17,13 +24,13 @@
 </template>
 
 <script>
-  import axios from "axios";
-    //let friends = [];
+  import HomeCard from "../components/HomeCard";
+  //let friends = [];
   export default {
     name: "HomeView",
-
+    components: { HomeCard },
     data: () => ({
-      friends: [],
+     // friends: [],
       cards: [
         {
           icon: "contacts",
@@ -40,21 +47,38 @@
       ]
 
     }),
+    methods: {
+      getFriendCount: function (isFave) {
+        if(isFave){
+          return this.favoriteCount();
+        } else {
+          return this.friendCount();
+        }
+      }
+    },
+    computed: {
+      friends: function() {
+        return this.$store.state.friends;
+        },
+      friendCount: function() {
+        return this.$store.state.friends.length;
+      },
+      favoriteCount: function() {
+        return this.$store.state.friends.filter((friend) => friend.fav).length;
+      }
+    },
     mounted() {
-      axios.get("http://localhost:3000/friends")
-        .then(response => {
-          this.friends = response.data;
-          let friendCount = this.friends.length;
-          let favoriteCount = this.friends.filter((friend) => friend.fav).length;
-          this.cards[0].number = friendCount;
-          this.cards[1].number = favoriteCount;
-        });
+      // axios.get("http://localhost:3000/friends")
+      //   .then(response => {
+      //     this.friends = response.data;
+      //     let friendCount = this.friends.length;
+      //     let favoriteCount = this.friends.filter((friend) => friend.fav).length;
+      //     this.cards[0].number = friendCount;
+      //     this.cards[1].number = favoriteCount;
+      //   });
     }
 
 
   };
 </script>
 
-<style scoped>
-
-</style>
