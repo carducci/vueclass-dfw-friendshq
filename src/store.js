@@ -15,6 +15,11 @@ export default new Vuex.Store({
         .then((response) => {
           commit("setFriends", response.data);
         });
+    },
+    addFriend({commit, payload}) {
+      axios.post("http://localhost:3000/friends", payload)
+        .then(() => console.log("success"))
+        .catch(() => console.error("failed"));
     }
   },
   mutations: {

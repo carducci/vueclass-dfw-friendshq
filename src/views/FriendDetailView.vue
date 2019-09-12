@@ -11,7 +11,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
   export default {
     data: function() {
       return {
@@ -24,11 +23,8 @@
     },
     methods: {
       submit: function() {
-        // create it ???
-        // axios.send();
-        axios.post("http://localhost:3000/friends", this.friendData)
-          .then(() => console.log("success"))
-          .catch(() => console.error("failed"))
+        this.$store.dispatch('addFriend', this.friendData);
+
       }
     },
     name: "FriendDetailView"
